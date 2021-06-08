@@ -1,0 +1,111 @@
+{
+    "source": "mockoon:1.14.1",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 15,
+                "name": "BPCashAdvance",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 3001,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "Returns simulate cash advace",
+                        "method": "post",
+                        "endpoint": "creditCard/simulateCashAdvance",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "\r\n{\r\n    \"payer\": {\r\n        \"id\": \"{{body 'transaction.payer.id'}}\",\r\n        \"idType\": \"{{body 'transaction.payer.idType'}}\",\r\n        \"creditCard\": \"{{body 'transaction.payer.creditCard'}}\", \r\n        \"creditCardBrand\": \"V SIGNATURE LATAM PASS SX\",\r\n        \"accountOwnerName\": \"PEREZ PEREZ JUAN JOSE\"\r\n    },\r\n    \"beneficiary\": {\r\n        \"accounts\": [\r\n            {\r\n                \"maskedAccount\": \"XXXXXX0123\",\r\n                \"hashAccount\": \"6878595151517468724e6d4e6f49703568586d55796179326f35467134494d334a694d366a6456367736493d\"\r\n            },\r\n            {\r\n                \"maskedAccount\": \"XXXXXX9876\",\r\n                \"hashAccount\": \"4b524f6a47394d33693332786a646b3462416a4e326652554c3555536f4650614a5a7a543732755052444d3d\"\r\n            }\r\n        ]\r\n    },\r\n    \"details\": {\r\n        \"serviceFee\": {\r\n            \"amount\": \"{{faker 'finance.amount' 1 1000 2}}\",\r\n            \"tax\": \"{{faker 'finance.amount' 1 100 2}}\",\r\n            \"total\": \"{{faker 'finance.amount' 1 1000 2}}\"\r\n        },\r\n        \"factorDetails\": {\r\n            \"factor\": \"{{faker 'finance.amount' 1 100 2}}\",\r\n            \"interest\": \"{{faker 'finance.amount' 1 100 2}}\",\r\n            \"finalAmount\": \"{{faker 'finance.amount' 1 1000 2}}\"\r\n            \"quota\":\"{{faker 'finance.amount' 1 1000 2}}\"\r\n        }\r\n    },\r\n    \"transactionDetail\": {\r\n        \"hashTransaction\": \"{{faker 'finance.mask' 20 false false}}\",\r\n        \"productType\": \"{{body 'transaction.transactionDetail.productType'}}\",\r\n        \"description\": \"Efectivo Express\",\r\n        \"amount\": \"{{body 'transaction.transactionDetail.amount'}}\",,\r\n        \"currency\": \"{{body 'transaction.transactionDetail.currency'}}\",,\r\n        \"term\": \"{{body 'transaction.transactionDetail.term'}}\"\r\n    },\r\n    \"flow\": {\r\n        \"status\": \"finalizar\",\r\n        \"fields\": [\r\n            {\r\n                \"key\": \"\",\r\n                \"value\": \"\"\r\n            }\r\n        ]\r\n    },\r\n    \"errorApi\": {\r\n        \"errorCode\": \"0\",\r\n        \"errorMessage\": \"OK\",\r\n        \"businessMessage\": \"Transación Exitosa.\"\r\n    }\r\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "body",
+                                        "modifier": "transaction.commerceInformation.officeName",
+                                        "value": "^((?SANDBOX).)*$",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "signature",
+                                        "value": "!^$",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n    \"title\": \"Invalid CommerceId.\",\r\n    \"detail\": \"No se encuentra registrado el comercio.\",\r\n    \"errors\": [],\r\n    \"instance\": \"031\",\r\n    \"type\": \"/clients/1802940401/cards/creditCard/simulateCashAdvance\"\r\n}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "Error CommerceId",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "body",
+                                        "modifier": "signature",
+                                        "value": "^$",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "proxyRemovePrefix": false,
+                "https": false,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "proxyReqHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "proxyResHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ]
+}
