@@ -30,8 +30,8 @@
                                     {
                                         "target": "body",
                                         "modifier": "transaction.commerceInformation.officeName",
-                                        "value": "^((?SANDBOX).)*$",
-                                        "isRegex": true
+                                        "value": "sandbox",
+                                        "isRegex": false
                                     },
                                     {
                                         "target": "body",
@@ -45,7 +45,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\r\n    \"title\": \"Invalid CommerceId.\",\r\n    \"detail\": \"No se encuentra registrado el comercio.\",\r\n    \"errors\": [],\r\n    \"instance\": \"031\",\r\n    \"type\": \"/clients/1802940401/cards/creditCard/simulateCashAdvance\"\r\n}",
+                                "body": "{\r\n    \"title\": \"Invalid Signature.\",\r\n    \"detail\": \"Firma inválida.\",\r\n    \"errors\": [],\r\n    \"instance\": \"031\",\r\n    \"type\": \"/clients/1802940401/cards/creditCard/simulateCashAdvance\"\r\n}",
                                 "latency": 0,
                                 "statusCode": 400,
                                 "label": "Error CommerceId",
@@ -62,12 +62,23 @@
                                 ],
                                 "rulesOperator": "OR",
                                 "disableTemplating": false
-                            },
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "status",
+                        "responses": [
                             {
                                 "uuid": "",
-                                "body": "{}",
+                                "body": "{\n  \"status\":\"running\"\n}",
                                 "latency": 0,
-                                "statusCode": 400,
+                                "statusCode": 200,
                                 "label": "",
                                 "headers": [],
                                 "filePath": "",
